@@ -44,53 +44,84 @@ At first, containers are **isolated**. To enable communication, Docker provides 
 
 ## 🛠 Docker Commands for Networking & Multi-Stage Builds
 
-### 🔹 Creating a Custom Bridge Network
+### 🚀 Creating a Custom Bridge Network
+
 ```sh
 docker network create my-net
 ```
-This creates a **user-defined bridge network** named `my-net`.
+Creates a user-defined bridge network named `my-net`.
 
-### 🔹 Inspecting the Network
+### 🔍 Inspecting the Network
+
 ```sh
 docker inspect my-net
 ```
 Displays details of the `my-net` network.
 
-### 🔹 Running an Nginx Container in a Custom Network
+### 🌍 Running an Nginx Container in a Custom Network
+
 ```sh
 docker run -d --network my-net --name nginx -p 80:80 nginx:latest
 ```
-Runs an **Nginx container** in the `my-net` network with port **80** exposed.
+Runs an Nginx container in the `my-net` network with port `80` exposed.
 
 ---
 
-## 🚀 Multi-Stage Build (Using Distroless for Production)
+## 🏗 Building a Multi-Stage Image (Using Distroless for Production)
 
-### 🔹 Building a Multi-Stage Image
 ```sh
 docker build -t online_app_short_distroless:latest -f ./Dockerfile-multistage-build .
 ```
-Builds an **optimized multi-stage image** using **distroless** for production security.
+Builds an optimized multi-stage image using **distroless** for production security.
 
-### 🔹 Running a Container from Multi-Stage Image
+### 🚢 Running a Container from Multi-Stage Image
+
 ```sh
 docker run -d --name online_shop_app_distroless -p 5173:5173 online_app_short_distroless:latest
 ```
-Runs the **application container** from the built image.
+Runs the application container from the built image.
 
-### 🔹 Creating a Container with Volume Mounting for Logs
+### 📂 Creating a Container with Volume Mounting for Logs
+
 ```sh
 docker run -d -v /home/ubuntu/volumes/my_app/:/logs -p 5137:5137 my_app:latest
 ```
-Maps **`/logs` in the container** to **`/home/ubuntu/volumes/my_app/` on the host** for **persistent logging**.
+Maps `/logs` in the container to `/home/ubuntu/volumes/my_app/` on the host for **persistent logging**.
 
 ---
 
-## 🎯 Key Takeaways
+## 📝 Docker Compose Commands
+
+### 🔄 Start & Stop Services
+
+```sh
+docker-compose up -d   # Start services in detached mode
+docker-compose down    # Stop and remove containers, networks, volumes
+```
+
+### 📌 Building & Restarting Services
+
+```sh
+docker-compose build   # Build or rebuild services
+docker-compose restart # Restart services
+```
+
+### 🔍 Viewing Logs & Container Status
+
+```sh
+docker-compose logs -f   # View logs of all services
+docker-compose ps       # List running containers
+```
+
+---
+
+## 📌 Key Takeaways
+
 - ✅ **Multi-stage builds** reduce image size and improve security.
-- ✅ Using **distroless images** eliminates unnecessary dependencies.
+- ✅ **Using distroless images** eliminates unnecessary dependencies.
 - ✅ **Custom bridge networks** enable better container-to-container communication.
 - ✅ **Docker volumes** help persist important data like logs and database files.
 
 This guide provides a structured approach to networking and production-ready Docker builds. 🚀
 
+---
